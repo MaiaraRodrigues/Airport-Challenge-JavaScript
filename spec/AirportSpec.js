@@ -3,18 +3,17 @@ describe('Airport', function(){
   var airport;
 
   beforeEach(function(){
-    airport = new Airport(5);
+    airport = new Airport();
+    plane = jasmine.createSpy('plane', ['land']);
   });
 
-  describe('new airport', function(){
-    it('has no planes when created', () => {
-      expect(airport.spaces).toEqual([]);
-    });
-
-    it('has capacity of 5', () => {
-      expect(airport.capacity).toEqual(5);
-    });
-
+  it('has no planes by default', () => {
+    expect(airport.planes()).toEqual([]);
   });
-
+  
+  it('can clear planes for landing', function(){
+    airport.clearForLanding(plane);
+    expect(airport.planes()).toEqual([plane]);
+  });
 });
+
